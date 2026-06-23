@@ -1,0 +1,6 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:05.000
+Speaker 1: Today we are going to discuss abstraction-first teaching and retrieval systems.
+Speaker 2: Yes, and we will reference the papers by Geoffrey Hinton and Yoshua Bengio regarding neural networks and backpropagation.
+Speaker 1: That sounds like a great methodology. We will use PyTorch and TensorFlow for our technologies.
