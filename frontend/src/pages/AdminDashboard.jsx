@@ -4,7 +4,8 @@ import { useDropzone } from "react-dropzone"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { 
-    UploadCloud, Loader2, ArrowRight, Trash2, Plus 
+    UploadCloud, Loader2, ArrowRight, Trash2, Plus,
+    LayoutDashboard, FileText, Library, Users, MessageSquare, Settings
 } from "lucide-react"
 
 export default function AdminDashboard() {

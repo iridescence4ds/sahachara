@@ -4,8 +4,10 @@ import axios from "axios"
 import { useDropzone } from "react-dropzone"
 import { 
   ArrowLeft, Loader2, Sparkles, UserCircle2, 
-  Box, AlignLeft, FileText, Image as ImageIcon, Plus, X, Layers, Eye
+  Box, AlignLeft, FileText, Image as ImageIcon, Plus, X, Layers, Eye, Download
 } from "lucide-react"
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import { TranscriptPDF } from '../components/TranscriptPDF'
 
 // Smart categorization helper
 const getFileCategory = (name, type = "") => {
@@ -158,9 +160,23 @@ export default function ResourceWorkspace() {
           </Link>
           <h1 style={{ margin: 0, fontSize: "24px", fontWeight: 600, color: "#0f172a" }}>Workspace: {data.filename}</h1>
         </div>
-        <button onClick={saveWorkspace} disabled={isSaving} className="glass-button" style={{ padding: "8px 24px", background: "#0f172a", color: "white" }}>
-          {isSaving ? <Loader2 className="lucide-spin" size={16} /> : "Save Workspace"}
-        </button>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <PDFDownloadLink
+            document={<TranscriptPDF data={data.global_entities || data} chunks={chunks} />}
+            fileName={`${data.filename || 'Transcript'}.pdf`}
+            className="glass-button"
+            style={{ padding: "8px 24px", color: "#0f172a", textDecoration: "none", display: "flex", alignItems: "center", gap: "8px" }}
+          >
+            {({ loading }) => (
+              <>
+                <Download size={16} /> {loading ? 'Preparing PDF...' : 'Download PDF'}
+              </>
+            )}
+          </PDFDownloadLink>
+          <button onClick={saveWorkspace} disabled={isSaving} className="glass-button" style={{ padding: "8px 24px", background: "#0f172a", color: "white" }}>
+            {isSaving ? <Loader2 className="lucide-spin" size={16} /> : "Save Workspace"}
+          </button>
+        </div>
       </div>
 
       {/* 3-Column Layout */}

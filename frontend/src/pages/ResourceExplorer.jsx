@@ -9,6 +9,8 @@ import {
     Layers, Eye, Download
 } from "lucide-react"
 import PremiumSlider from "../components/PremiumSlider"
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import { TranscriptPDF } from '../components/TranscriptPDF'
 
 // Smart categorization helper
 const getFileCategory = (name, type = "") => {
@@ -337,6 +339,18 @@ export default function ResourceExplorer() {
               <button className="glass-button" style={{ padding: "10px 20px", fontSize: "14px", display: "flex", alignItems: "center", gap: "8px", borderRadius: "99px", color: "#0f172a" }}>
                 <MessageSquare size={16} /> Discussions
               </button>
+              <PDFDownloadLink 
+                document={<TranscriptPDF data={data} chunks={chunks} />} 
+                fileName={`${title}.pdf`}
+                className="glass-button" 
+                style={{ padding: "10px 20px", fontSize: "14px", display: "flex", alignItems: "center", gap: "8px", borderRadius: "99px", color: "#0f172a", textDecoration: "none" }}
+              >
+                {({ loading }) => (
+                  <>
+                    <Download size={16} /> {loading ? 'Preparing PDF...' : 'Download PDF'}
+                  </>
+                )}
+              </PDFDownloadLink>
             </div>
 
             <div style={{ marginTop: "24px", paddingTop: "24px", borderTop: "1px solid rgba(0,0,0,0.05)" }}>
